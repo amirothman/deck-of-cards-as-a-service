@@ -29,11 +29,28 @@ class Card:
         """
         if _has_read_permission(self.owner, reader, self.covered):
             return self.suit, self.number
+        else:
+            raise AttributeError(
+                "Reader does not have permission. card.owner: {}, "
+                "card.covered: {}, reader.name: {}".format(
+                    self.owner, self.covered, reader.name
+                )
+            )
 
     def reveal(self, revealer):
         if _has_flip_permission(self.owner, revealer):
             self.covered = False
+        else:
+            raise AttributeError(
+                "Reader does not have permission. card.owner: {}, "
+                "revealer.name: {}".format(self.owner, revealer.name)
+            )
 
     def cover(self, coverer):
         if _has_flip_permission(self.owner, coverer):
             self.covered = True
+        else:
+            raise AttributeError(
+                "Reader does not have permission. card.owner: {}, "
+                "coverer.name: {}".format(self.owner, coverer.name)
+            )
