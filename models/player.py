@@ -5,11 +5,11 @@ class Player(Base):
     def __init__(self, name):
         self.cards = []
         self.name = name
-        self.table = None
+        self.table_name = None
 
     def join_table(self, table):
         table.add_player(self)
-        self.table = table
+        self.table_name = table.name
 
     def take_card_by_index(self, original_owner, index):
         """Take a card from someone/table by referencing

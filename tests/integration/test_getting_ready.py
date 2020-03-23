@@ -17,5 +17,5 @@ def test_players_and_cards_on_a_table():
     assert table.players == players
 
     for player in players:
-        assert player.table == table
-        assert player.table != second_table
+        assert player.table_name == table.name
+        assert player.table_name != second_table.name
