@@ -2,7 +2,7 @@
 
 Create a general deck of cards for any card playing purpose
 
-# Todos
+## Todos
 
     [x] Model - code business logic
     [ ] API endpoints
