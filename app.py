@@ -22,6 +22,7 @@ class Config:
 def create_app():
     """Prepare and return a new instance of the Flask app."""
     app = Flask(__name__)
+    app.url_map.strict_slashes = False
     app.config.from_object(Config)
     set_logger(app)
     register_blueprints(app)
@@ -32,3 +33,6 @@ def create_app():
 def register_blueprints(app):
     """Attach API routes to the application."""
     app.register_blueprint(api_blueprint)
+
+
+app = create_app()

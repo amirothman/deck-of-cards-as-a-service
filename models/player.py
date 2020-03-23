@@ -1,3 +1,4 @@
+from uuid import uuid4
 from .base import Base
 
 
@@ -5,6 +6,7 @@ class Player(Base):
     def __init__(self, name):
         self.cards = []
         self.name = name
+        self.signature = str(uuid4())
         self.table_name = None
 
     def join_table(self, table):
