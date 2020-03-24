@@ -1,4 +1,4 @@
-from helpers import get_deck_of_cards
+from models.card import get_deck_of_cards
 
 
 def test_deck_of_cards_default():

@@ -27,9 +27,10 @@ class PlayerSchema(Schema):
 
 class TableSchema(Schema):
     name = fields.Str()
-    cards = fields.Nested(CardSchema(), many=True)
-    players = fields.Nested(PlayerSchema(), many=True)
+    cards = fields.List(fields.Nested(CardSchema()), allow_none=True)
+    players = fields.List(fields.Nested(PlayerSchema()), allow_none=True)
 
     @post_load
     def create_table(self, data, **kwargs):
-        return Table(**data)
+        table = Table()
+        return table

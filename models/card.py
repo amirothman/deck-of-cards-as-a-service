@@ -1,4 +1,4 @@
-from constants import TABLE
+from constants import SUITS, NUMBERS, TABLE
 
 
 def _has_read_permission(owner, reader, covered):
@@ -7,6 +7,14 @@ def _has_read_permission(owner, reader, covered):
 
 def _has_flip_permission(owner, flipper):
     return (owner == TABLE) or (owner == flipper.name)
+
+
+def get_deck_of_cards(**kwargs):
+    deck = []
+    for suit in SUITS:
+        for number in NUMBERS:
+            deck.append(Card(suit, number, **kwargs))
+    return deck
 
 
 class Card:
