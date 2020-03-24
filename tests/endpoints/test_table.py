@@ -21,3 +21,12 @@ def test_create_table_endpoint(client):
     assert table.name
     assert table.cards
     assert table.players == []
+
+
+def test_get_table_endpoint(client):
+    endpoint = "/table"
+    res = client.post(endpoint)
+    table = TableSchema().load(res.json)
+    res = client.get("/table/{}".format(table.name))
+
+    assert res.status_code == 200

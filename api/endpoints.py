@@ -17,8 +17,6 @@ class TableAPI(MethodView):
         dump = TableSchema().dump(table)
         return jsonify(dump)
 
-
-class ListTableAPI(MethodView):
     def post(self):
         # create a new table
         table = Table()
@@ -27,10 +25,13 @@ class ListTableAPI(MethodView):
         return jsonify(dump)
 
 
-class ListPlayerAPI(MethodView):
+class PlayerAPI(MethodView):
     schema = PlayerSchema()
 
-    def get(self, table_name):
+    def get(self, table_name, player_name):
+        if player_name:
+            return jsonify(self.schema.dump(players[table_name][player_name]))
+
         return jsonify(self.schema.dump(players[table_name].values(), many=True))
 
     def post(self, table_name):
@@ -43,13 +44,6 @@ class ListPlayerAPI(MethodView):
         players[table_name][player.name] = player
 
         return jsonify(self.schema.dump(player))
-
-
-class PlayerAPI(MethodView):
-    schema = PlayerSchema()
-
-    def get(self, table_name, player_name):
-        return jsonify(self.schema.dump(players[table_name][player_name]))
 
 
 class PlayersCardsAPI(MethodView):

@@ -4,8 +4,8 @@ from marshmallow import Schema, fields, post_load
 
 
 class CardSchema(Schema):
-    suit = fields.Str()
-    number = fields.Str()
+    suit = fields.Str(load_only=True)
+    number = fields.Str(load_only=True)
     covered = fields.Bool()
     owner = fields.Str()
 
@@ -15,10 +15,10 @@ class CardSchema(Schema):
 
 
 class PlayerSchema(Schema):
-    cards = fields.Nested(CardSchema(), many=True)
+    cards = fields.Nested(CardSchema(), many=True, dump_only=True)
     name = fields.Str()
-    table_name = fields.Str()
-    signature = fields.Str()
+    table_name = fields.Str(dump_only=True)
+    signature = fields.Str(dump_only=True)
 
     @post_load
     def create_player(self, data, **kwargs):
