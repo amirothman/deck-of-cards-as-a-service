@@ -20,3 +20,15 @@ Create a general deck of cards for any card playing purpose
             [ ] Tested
     [ ] Web front end
     [ ] Documentation
+
+## Endpoints
+
+        Endpoint           Methods       Rule
+        -----------------  ------------  -------------------------------------------------------------
+        api.player         GET           /table/<table_name>/players/<player_name>
+        api.player         POST          /table/<table_name>/players
+        api.players_cards  DELETE, POST  /table/<table_name>/players/<current_name>/cards/<other_name>
+        api.table          POST          /table
+        api.table          GET           /table/<table_name>
+        api.table_cards    DELETE, POST  /table/<table_name>/players/<current_name>/table
+        static             GET           /static/<path:filename>
