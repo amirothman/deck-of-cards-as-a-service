@@ -34,3 +34,8 @@ class TableSchema(Schema):
     def create_table(self, data, **kwargs):
         table = Table()
         return table
+
+
+class MoveCardSchema(Schema):
+    signature = fields.Str()
+    index = fields.Int()
