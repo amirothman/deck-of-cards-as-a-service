@@ -3,17 +3,32 @@ from collections import defaultdict
 from flask import jsonify, request
 from flask.views import MethodView
 
+# from constants import TABLES_HASH, PLAYERS_HASH
 from models.table import Table
+
+# from redis_client import redis_client
 from schemas import TableSchema, PlayerSchema, MoveCardSchema
 
 tables = {}
 players = defaultdict(dict)
 
 
+# def assign_to_tables_hash(table):
+#     dumped_string = TableSchema().dumps(table)
+#     redis_client.hset(TABLES_HASH, table.name, dumped_string)
+
+
+# def get_from_tables_hash(table_name):
+#     table_string = redis_client.hget(TABLES_HASH, table_name)
+#     return TableSchema().loads(table_string)
+
+
 class TableAPI(MethodView):
     def get(self, table_name):
         # get table
         table = tables[table_name]
+        # table = get_from_tables_hash(table_name)
+
         dump = TableSchema().dump(table)
         return jsonify(dump)
 
@@ -21,6 +36,8 @@ class TableAPI(MethodView):
         # create a new table
         table = Table()
         tables[table.name] = table
+        # assign_to_tables_hash(table)
+
         dump = TableSchema().dump(table)
         return jsonify(dump)
 

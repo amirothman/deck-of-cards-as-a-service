@@ -5,3 +5,5 @@ SPADE = "spade"
 SUITS = [ACE, CLUB, HEART, SPADE]
 NUMBERS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 TABLE = "table"
+TABLES_HASH = "tables_deck_of_cards"
+PLAYERS_HASH = "players_deck_of_cards"

@@ -32,3 +32,9 @@ Create a general deck of cards for any card playing purpose
         api.table          GET           /table/<table_name>
         api.table_cards    DELETE, POST  /table/<table_name>/players/<current_name>/table
         static             GET           /static/<path:filename>
+
+
+## Authorization
+
+When a player is created, the server returns a 'signature'.
+This signature should be included in each subsequent requests.
