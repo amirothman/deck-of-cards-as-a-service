@@ -49,15 +49,14 @@ Create a general deck of cards for any card playing purpose.
 ## Endpoints
 
         Endpoint           Methods       Rule
-        -----------------  ------------  -------------------------------------------------------------
-        api.player         GET           /table/<table_name>/players/<player_name>
-        api.player         POST          /table/<table_name>/players
-        api.players_cards  DELETE, POST  /table/<table_name>/players/<current_name>/cards/<other_name>
-        api.table          POST          /table
-        api.table          GET           /table/<table_name>
-        api.table_cards    DELETE, POST  /table/<table_name>/players/<current_name>/table
+        -----------------  ------------  -----------------------------------------------------------------
+        api.player         GET           /api/table/<table_name>/players/<player_name>
+        api.player         POST          /api/table/<table_name>/players
+        api.players_cards  DELETE, POST  /api/table/<table_name>/players/<current_name>/cards/<other_name>
+        api.table          POST          /api/table
+        api.table          GET           /api/table/<table_name>
+        api.table_cards    DELETE, POST  /api/table/<table_name>/players/<current_name>/table
         static             GET           /static/<path:filename>
-
 
 ## Authorization
 
