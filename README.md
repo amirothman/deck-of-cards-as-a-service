@@ -20,13 +20,20 @@ Create a general deck of cards for any card playing purpose.
             [x] Tested
         [ ] Covering/uncovering cards
             [ ] Can cover own cards
+            [ ] Tested
             [ ] Can uncover own cards
+            [ ] Tested
             [ ] Can cover cards on the table
+            [ ] Tested
             [ ] Can uncover cards on the table
+            [ ] Tested
         [ ] Reading cards
-            [ ] Can read own cards
-            [ ] Can read uncovered cards on the table
-            [ ] Can read uncovered cards from other players
+            [x] Can read own cards
+            [ ] Tested
+            [x] Can read uncovered cards on the table
+            [ ] Tested
+            [x] Can read uncovered cards from other players
+            [ ] Tested
         [ ] Shuffle own cards
         [ ] Shuffle cards on the table
     [ ] Web front end

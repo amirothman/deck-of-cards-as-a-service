@@ -6,7 +6,7 @@ from werkzeug.exceptions import Forbidden
 
 from models.table import Table
 
-from schemas import TableSchema, PlayerSchema, MoveCardSchema
+from schemas import TableSchema, PlayerSchema, CardActionSchema, CardSchema
 
 tables = {}
 players = defaultdict(dict)
@@ -51,14 +51,14 @@ class PlayerAPI(MethodView):
 
 
 class PlayersCardsAPI(MethodView):
-    move_card_schema = MoveCardSchema()
+    card_action_schema = CardActionSchema()
     player_schema = PlayerSchema()
 
     def post(self, table_name, current_name, other_name):
         """Give card from current_name to other_name"""
 
         current_player = players[table_name][current_name]
-        give_card = self.move_card_schema.load(request.get_json())
+        give_card = self.card_action_schema.load(request.get_json())
 
         if give_card["signature"] == current_player.signature:
             recepient = players[table_name][other_name]
@@ -86,14 +86,14 @@ class PlayersCardsAPI(MethodView):
 
 
 class TableCardsAPI(MethodView):
-    move_card_schema = MoveCardSchema()
+    card_action_schema = CardActionSchema()
     table_schema = TableSchema()
 
     def post(self, table_name, current_name):
         """Give card from current_name to table"""
 
         current_player = players[table_name][current_name]
-        give_card = self.move_card_schema.load(request.get_json())
+        give_card = self.card_action_schema.load(request.get_json())
 
         if give_card["signature"] == current_player.signature:
             table = tables[table_name]
@@ -108,12 +108,49 @@ class TableCardsAPI(MethodView):
         """Take card from table to current_name"""
 
         current_player = players[table_name][current_name]
-        take_card = self.move_card_schema.load(request.get_json())
+        take_card = self.card_action_schema.load(request.get_json())
 
         if take_card["signature"] == current_player.signature:
             table = tables[table_name]
             current_player.take_card_by_index(table, take_card["index"])
             return jsonify(self.table_schema.dump(table))
+        else:
+            raise Forbidden(
+                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            )
+
+
+class ReadPlayerCardAPI(MethodView):
+    card_action_schema = CardActionSchema()
+    card_schema = CardSchema()
+
+    def get(self, table_name, card_owner_name, index, signature):
+        card_owner = players[table_name][card_owner_name]
+        card = card_owner.cards[index]
+
+        # check if card_owner equals the reader
+        if signature == card_owner.signature:
+            return jsonify(self.card_schema.dump(card))
+        # check if card not covered
+        elif not card.covered:
+            return jsonify(self.card_schema.dump(card))
+        else:
+            raise Forbidden(
+                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            )
+
+
+class ReadTableCardAPI(MethodView):
+    card_action_schema = CardActionSchema()
+    card_schema = CardSchema()
+
+    def get(self, table_name, index):
+        table = tables[table_name]
+        card = table.cards[index]
+
+        # check if card not covered
+        if not card.covered:
+            return jsonify(self.card_schema.dump(card))
         else:
             raise Forbidden(
                 description="Not allowed", response=jsonify(dict(msg="Not allowed."))
