@@ -2,6 +2,7 @@ from collections import defaultdict
 
 from flask import jsonify, request
 from flask.views import MethodView
+from werkzeug.exceptions import Forbidden
 
 from models.table import Table
 
@@ -64,7 +65,9 @@ class PlayersCardsAPI(MethodView):
             current_player.give_card_by_index(recepient, give_card["index"])
             return jsonify(self.player_schema.dump(recepient))
         else:
-            raise Exception("Not allowed")
+            raise Forbidden(
+                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            )
 
     def delete(self, table_name, current_name, other_name):
         """Take card from other_name to current_name"""
@@ -77,7 +80,9 @@ class PlayersCardsAPI(MethodView):
             current_player.take_card_by_index(original_owner, take_card["index"])
             return jsonify(self.player_schema.dump(original_owner))
         else:
-            raise Exception("Not allowed")
+            raise Forbidden(
+                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            )
 
 
 class TableCardsAPI(MethodView):
@@ -95,7 +100,9 @@ class TableCardsAPI(MethodView):
             current_player.give_card_by_index(table, give_card["index"])
             return jsonify(self.table_schema.dump(table))
         else:
-            raise Exception("Not allowed")
+            raise Forbidden(
+                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            )
 
     def delete(self, table_name, current_name):
         """Take card from table to current_name"""
@@ -108,4 +115,6 @@ class TableCardsAPI(MethodView):
             current_player.take_card_by_index(table, take_card["index"])
             return jsonify(self.table_schema.dump(table))
         else:
-            raise Exception("Not allowed")
+            raise Forbidden(
+                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            )

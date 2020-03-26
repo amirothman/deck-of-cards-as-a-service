@@ -1,4 +1,4 @@
-from models import Card, Player, Table
+from models import Card, Player
 
 from marshmallow import Schema, fields, post_load
 

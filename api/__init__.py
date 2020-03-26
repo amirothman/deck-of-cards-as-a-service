@@ -2,7 +2,7 @@ from flask import Blueprint
 
 from .endpoints import TableAPI, PlayerAPI, PlayersCardsAPI, TableCardsAPI
 
-api_blueprint = Blueprint("api", __name__)
+api_blueprint = Blueprint("api", __name__, url_prefix="/api")
 
 table_view = TableAPI.as_view("table")
 api_blueprint.add_url_rule("/table/<table_name>", view_func=table_view, methods=["GET"])
