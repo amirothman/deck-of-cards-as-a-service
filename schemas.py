@@ -34,3 +34,7 @@ class TableSchema(Schema):
 class CardActionSchema(Schema):
     signature = fields.Str()
     index = fields.Int()
+
+
+class CoverCardSchema(CardActionSchema):
+    cover = fields.Bool()

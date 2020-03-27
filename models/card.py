@@ -24,7 +24,7 @@ class Card:
         self.covered = covered
         self.owner = owner
 
-    def read(self, reader):
+    def read(self, reader=None):
         """Read the card
 
         Arguments:
@@ -45,7 +45,7 @@ class Card:
                 )
             )
 
-    def reveal(self, revealer):
+    def reveal(self, revealer=None):
         if _has_flip_permission(self.owner, revealer):
             self.covered = False
         else:

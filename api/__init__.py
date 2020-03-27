@@ -5,8 +5,8 @@ from .endpoints import (
     PlayerAPI,
     PlayersCardsAPI,
     TableCardsAPI,
-    ReadPlayerCardAPI,
-    ReadTableCardAPI,
+    PlayerCardActionAPI,
+    TableCardActionAPI,
 )
 
 api_blueprint = Blueprint("api", __name__, url_prefix="/api")
@@ -35,13 +35,28 @@ api_blueprint.add_url_rule(
     "/table/<table_name>/players/<current_name>/table", view_func=table_cards_view
 )
 
-read_table_card_view = ReadTableCardAPI.as_view("table_card")
+read_table_card_view = TableCardActionAPI.as_view("table_card")
 api_blueprint.add_url_rule(
-    "/table/<table_name>/card/<index>", view_func=read_table_card_view,
+    "/table/<table_name>/card/<int:index>",
+    view_func=read_table_card_view,
+    methods=["GET"],
 )
 
-read_player_card_view = ReadPlayerCardAPI.as_view("player_card")
+table_card_visibility_view = TableCardActionAPI.as_view("table_card_visibility")
 api_blueprint.add_url_rule(
-    "/table/<table_name>/player/<card_owner_name>/card/<index>/<signature>",
+    "/table/<table_name>/card", view_func=table_card_visibility_view, methods=["PATCH"],
+)
+
+read_player_card_view = PlayerCardActionAPI.as_view("player_card")
+api_blueprint.add_url_rule(
+    "/table/<table_name>/player/<card_owner_name>/card/<int:index>/<signature>",
     view_func=read_player_card_view,
+    methods=["GET"],
+)
+
+player_card_visibility_view = PlayerCardActionAPI.as_view("player_card_visibility")
+api_blueprint.add_url_rule(
+    "/table/<table_name>/player/<card_owner_name>/card",
+    view_func=player_card_visibility_view,
+    methods=["PATCH"],
 )
