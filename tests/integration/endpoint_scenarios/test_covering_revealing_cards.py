@@ -72,8 +72,16 @@ def test_can_cover_own_card(client, player_with_an_uncovered_card):
 
 def test_cannot_cover_card_of_other_players(client, one_player_with_an_uncovered_card):
     player_1 = one_player_with_an_uncovered_card[0]
+
     player_2 = one_player_with_an_uncovered_card[1]
-    assert False
+
+    endpoint = "/api/table/{}/player/{}/card".format(
+        player_1["table_name"], player_1["name"],
+    )
+    res = client.patch(
+        endpoint, json=dict(signature=player_2["signature"], index=0, cover=True)
+    )
+    assert res.status_code != 200
 
 
 @pytest.mark.skip

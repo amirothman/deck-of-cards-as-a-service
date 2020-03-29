@@ -75,8 +75,12 @@ class PlayersCardsAPI(MethodView):
             current_player.give_card_by_index(recepient, give_card["index"])
             return jsonify(self.player_schema.dump(recepient))
         else:
-            raise Forbidden(
-                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
             )
 
     def delete(self, table_name, current_name, other_name):
@@ -90,8 +94,12 @@ class PlayersCardsAPI(MethodView):
             current_player.take_card_by_index(original_owner, take_card["index"])
             return jsonify(self.player_schema.dump(original_owner))
         else:
-            raise Forbidden(
-                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
             )
 
 
@@ -110,8 +118,12 @@ class TableCardsAPI(MethodView):
             current_player.give_card_by_index(table, give_card["index"])
             return jsonify(self.table_schema.dump(table))
         else:
-            raise Forbidden(
-                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
             )
 
     def delete(self, table_name, current_name):
@@ -125,8 +137,12 @@ class TableCardsAPI(MethodView):
             current_player.take_card_by_index(table, take_card["index"])
             return jsonify(self.table_schema.dump(table))
         else:
-            raise Forbidden(
-                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
             )
 
 
@@ -146,8 +162,12 @@ class PlayerCardActionAPI(MethodView):
         elif not card.covered:
             return jsonify(self.card_schema.dump(card))
         else:
-            raise Forbidden(
-                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
             )
 
     def patch(self, table_name, card_owner_name):
@@ -164,8 +184,12 @@ class PlayerCardActionAPI(MethodView):
                 card.reveal(card_owner)
             return jsonify(self.card_schema.dump(card))
         else:
-            raise Forbidden(
-                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
             )
 
 
@@ -181,8 +205,12 @@ class TableCardActionAPI(MethodView):
         if not card.covered:
             return jsonify(self.card_schema.dump(card))
         else:
-            raise Forbidden(
-                description="Not allowed", response=jsonify(dict(msg="Not allowed."))
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
             )
 
     def patch(self, table_name):
