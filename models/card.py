@@ -54,7 +54,7 @@ class Card:
                 "revealer.name: {}".format(self.owner, revealer.name)
             )
 
-    def cover(self, coverer):
+    def cover(self, coverer=None):
         if _has_flip_permission(self.owner, coverer):
             self.covered = True
         else:
