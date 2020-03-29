@@ -26,12 +26,12 @@ Create a general deck of cards for any card playing purpose.
             [x] Can uncover own cards
                 [x] Implemented
                 [x] Tested
-            [ ] Can cover cards on the table
+            [x] Can cover cards on the table
                 [x] Implemented
-                [ ] Tested
-            [ ] Can uncover cards on the table
+                [x] Tested
+            [x] Can uncover cards on the table
                 [x] Implemented
-                [ ] Tested
+                [x] Tested
         [ ] Reading cards
             [ ] Hide cards that are covered when reading table
             [ ] Hide cards that are covered when reading player
