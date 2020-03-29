@@ -19,7 +19,7 @@ Create a general deck of cards for any card playing purpose.
         [x] Give/take cards to/from table
             [x] Implemented
             [x] Tested
-        [ ] Covering/uncovering cards
+        [x] Covering/uncovering cards
             [x] Can cover own cards
                 [x] Implemented
                 [x] Tested
@@ -34,6 +34,8 @@ Create a general deck of cards for any card playing purpose.
                 [x] Tested
         [ ] Reading cards
             [ ] Hide cards that are covered when reading table
+                [x] Implemented
+                [ ] Tested
             [ ] Hide cards that are covered when reading player
             [x] Can read own cards
                 [x] Implemented

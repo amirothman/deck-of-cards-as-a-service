@@ -7,11 +7,12 @@ from werkzeug.exceptions import Forbidden
 from models.table import Table
 
 from schemas import (
-    TableSchema,
-    PlayerSchema,
     CardActionSchema,
     CardSchema,
     CoverCardSchema,
+    HidableCardSchema,
+    PlayerSchema,
+    TableSchema,
 )
 
 tables = {}
@@ -194,7 +195,7 @@ class PlayerCardActionAPI(MethodView):
 
 
 class TableCardActionAPI(MethodView):
-    card_schema = CardSchema()
+    card_schema = HidableCardSchema()
     cover_card_schema = CoverCardSchema()
 
     def get(self, table_name, index):
@@ -214,7 +215,7 @@ class TableCardActionAPI(MethodView):
             )
 
     def patch(self, table_name):
-        """Read card by index. The card is owned by the table."""
+        """Cover/reveal a card by index which is owned by the table."""
 
         table = tables[table_name]
         cover_card = self.cover_card_schema.load(request.get_json())

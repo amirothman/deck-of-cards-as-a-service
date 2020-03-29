@@ -101,7 +101,7 @@ def test_cannot_reveal_card_of_other_players(client, three_players_with_cards):
 def test_can_reveal_card_from_table(client, three_players_with_cards):
     player = three_players_with_cards[0]
     table_name = player["table_name"]
-    endpoint = "/api/table/{}/card".format(player["table_name"], player["name"])
+    endpoint = "/api/table/{}/card".format(player["table_name"])
     res = client.patch(endpoint, json=dict(index=0, cover=True))
 
     assert res.status_code == 200
@@ -115,7 +115,7 @@ def test_can_reveal_card_from_table(client, three_players_with_cards):
 def test_can_cover_card_from_table(client, three_players_with_cards):
     player = three_players_with_cards[0]
     table_name = player["table_name"]
-    endpoint = "/api/table/{}/card".format(player["table_name"], player["name"])
+    endpoint = "/api/table/{}/card".format(player["table_name"])
     res = client.patch(endpoint, json=dict(index=0, cover=True))
 
     assert res.status_code == 200
