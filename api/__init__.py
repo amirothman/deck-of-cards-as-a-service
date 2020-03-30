@@ -1,12 +1,14 @@
 from flask import Blueprint
 
 from .endpoints import (
-    TableAPI,
     PlayerAPI,
     PlayersCardsAPI,
-    TableCardsAPI,
     PlayerCardActionAPI,
+    ShufflePlayerCardsAPI,
+    ShuffleTableCardsAPI,
+    TableAPI,
     TableCardActionAPI,
+    TableCardsAPI,
 )
 
 api_blueprint = Blueprint("api", __name__, url_prefix="/api")
@@ -59,4 +61,15 @@ api_blueprint.add_url_rule(
     "/table/<table_name>/player/<card_owner_name>/card",
     view_func=player_card_visibility_view,
     methods=["PATCH"],
+)
+
+shuffle_table_cards_view = ShuffleTableCardsAPI.as_view("shuffle_table_cards")
+api_blueprint.add_url_rule(
+    "/table/<table_name>/cards", view_func=shuffle_table_cards_view
+)
+
+shuffle_player_cards_view = ShufflePlayerCardsAPI.as_view("shuffle_player_cards")
+api_blueprint.add_url_rule(
+    "/table/<table_name>/player/<card_owner_name>/cards",
+    view_func=shuffle_player_cards_view,
 )

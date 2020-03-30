@@ -67,16 +67,18 @@ Create a general deck of cards for any card playing purpose.
 
 ## Endpoints
 
-        Endpoint           Methods       Rule
-        -----------------  ------------  -----------------------------------------------------------------
+        Endpoint                    Methods       Rule
+        --------------------------  ------------  -----------------------------------------------------------------------------
         api.player                  GET           /api/table/<table_name>/players/<player_name>
         api.player                  POST          /api/table/<table_name>/players
-        api.player_card             GET           /api/table/<table_name>/player/<card_owner_name>/card/<index>/<signature>
+        api.player_card             GET           /api/table/<table_name>/player/<card_owner_name>/card/<int:index>/<signature>
         api.player_card_visibility  PATCH         /api/table/<table_name>/player/<card_owner_name>/card
         api.players_cards           DELETE, POST  /api/table/<table_name>/players/<current_name>/cards/<other_name>
+        api.shuffle_player_cards    PATCH         /api/table/<table_name>/player/<card_owner_name>/cards
+        api.shuffle_table_cards     PATCH         /api/table/<table_name>/cards
         api.table                   POST          /api/table
         api.table                   GET           /api/table/<table_name>
-        api.table_card              GET           /api/table/<table_name>/card/<index>
+        api.table_card              GET           /api/table/<table_name>/card/<int:index>
         api.table_card_visibility   PATCH         /api/table/<table_name>/card
         api.table_cards             DELETE, POST  /api/table/<table_name>/players/<current_name>/table
         static                      GET           /static/<path:filename>

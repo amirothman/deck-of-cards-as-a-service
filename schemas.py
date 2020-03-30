@@ -41,8 +41,11 @@ class TableSchema(Schema):
     players = fields.List(fields.Nested(PlayerSchema()), dump_only=True)
 
 
-class CardActionSchema(Schema):
+class ActionSchema(Schema):
     signature = fields.Str()
+
+
+class CardActionSchema(ActionSchema):
     index = fields.Int()
 
 

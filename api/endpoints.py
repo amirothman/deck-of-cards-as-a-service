@@ -13,6 +13,7 @@ from schemas import (
     HidableCardSchema,
     PlayerSchema,
     TableSchema,
+    ActionSchema,
 )
 
 tables = {}
@@ -226,3 +227,32 @@ class TableCardActionAPI(MethodView):
         elif cover_card["cover"] is False:
             card.reveal()
         return jsonify(self.card_schema.dump(card))
+
+
+class ShuffleTableCardsAPI(MethodView):
+    table_schema = TableSchema()
+
+    def patch(self, table_name):
+        table = tables[table_name]
+        table.shuffle_cards()
+        return jsonify(self.table_schema.dump(table))
+
+
+class ShufflePlayerCardsAPI(MethodView):
+    action_schema = ActionSchema()
+    player_schema = PlayerSchema()
+
+    def patch(self, table_name, card_owner_name):
+        action = self.action_schema.load(request.get_json())
+        player = players[table_name][card_owner_name]
+        if action["signature"] == player.signature:
+            player.shuffle_cards()
+            return jsonify(self.player_schema.dump(player))
+        else:
+            return (
+                Forbidden(
+                    description="Not allowed",
+                    response=jsonify(dict(msg="Not allowed.")),
+                ),
+                405,
+            )

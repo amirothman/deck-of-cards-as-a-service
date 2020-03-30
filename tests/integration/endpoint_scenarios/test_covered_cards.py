@@ -1,7 +1,5 @@
 import json
 
-import pytest
-
 from constants import COVERED_LABEL
 
 
