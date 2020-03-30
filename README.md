@@ -6,7 +6,7 @@ Create a general deck of cards for any card playing purpose.
 
     [ ] Signature to be included as a URL parameter
     [x] Model - code business logic
-    [ ] API endpoints
+    [x] API endpoints
         [x] Create table
             [x] Implemented
             [x] Tested
@@ -46,9 +46,10 @@ Create a general deck of cards for any card playing purpose.
             [x] Can read uncovered cards from other players
                 [x] Implemented
                 [x] Tested
-        [ ] Shuffle own cards
-        [ ] Shuffle cards on the table
+        [x] Shuffle own cards
+        [x] Shuffle cards on the table
     [ ] Web front end
+        [ ] Necessary Server-Sent Events channel to allow multiplayer
     [ ] Documentation
         [ ] Creating a table
         [ ] Joining a table (creating a player)
