@@ -1,7 +1,7 @@
 from constants import COVERED_LABEL
 from models import Card, Player
 
-from marshmallow import Schema, fields, post_load, pre_dump
+from marshmallow import Schema, fields, post_load, post_dump
 
 
 class CardSchema(Schema):
@@ -16,11 +16,11 @@ class CardSchema(Schema):
 
 
 class HidableCardSchema(CardSchema):
-    @pre_dump
+    @post_dump
     def hide_cards(self, data, **kwargs):
-        if data.covered is True:
-            data.suit = COVERED_LABEL
-            data.number = COVERED_LABEL
+        if data["covered"] is True:
+            data["suit"] = COVERED_LABEL
+            data["number"] = COVERED_LABEL
         return data
 
 

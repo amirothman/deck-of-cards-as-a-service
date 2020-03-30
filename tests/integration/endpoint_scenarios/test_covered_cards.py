@@ -18,7 +18,6 @@ def test_read_covered_cards_on_table(client, three_players_with_cards):
         assert card["number"] == COVERED_LABEL
 
 
-@pytest.mark.skip
 def test_read_revealed_cards_on_table(client, three_players_with_cards):
     player = three_players_with_cards[0]
     table_name = player["table_name"]
@@ -29,15 +28,12 @@ def test_read_revealed_cards_on_table(client, three_players_with_cards):
     table = json.loads(res.data)
     endpoint = "/api/table/{}/card".format(player["table_name"])
     for idx, card in enumerate(table["cards"]):
-        res = client.patch(endpoint, json=dict(index=idx, cover=False))
+        res_patch = client.patch(endpoint, json=dict(index=idx, cover=False))
+        assert res_patch.status_code == 200
 
-        assert res.status_code == 200
+        table_endpoint = f"/api/table/{table_name}"
+        res = client.get(table_endpoint)
 
-        endpoint = f"/api/table/{table_name}"
-        res = client.get(endpoint)
         table = json.loads(res.data)
-        import pdb
-
-        pdb.set_trace()
         assert table["cards"][idx]["number"] != COVERED_LABEL
         assert table["cards"][idx]["suit"] != COVERED_LABEL
