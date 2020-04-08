@@ -5,6 +5,7 @@ const clearContent = () => {
 
 const getDivWithTable = (tableData) => {
     const placeholder = document.createElement("div");
+    placeholder.setAttribute("id", "tableCards");
     const h5 = document.createElement("h5")
     h5.innerHTML = "Table"
     placeholder.appendChild(h5)
@@ -16,6 +17,7 @@ const getDivWithTable = (tableData) => {
     placeholder.appendChild(h5b)
     tableData.cards.forEach(card => {
         const span = document.createElement("span")
+        span.setAttribute("class", "card")
         if (card.covered) {
             span.innerHTML = "#"
         } else {
@@ -29,15 +31,15 @@ const getDivWithTable = (tableData) => {
 const getDivWithPlayer = (playerData) => {
     const placeholder = document.createElement("div");
     const h5 = document.createElement("h5")
-    h5.innerHTML = "Yours"
-
+    h5.innerHTML = "Your cards"
     placeholder.appendChild(h5)
 
     playerData.cards.forEach(card => {
         const span = document.createElement("span")
+        span.setAttribute("class", "card")
         span.innerHTML = `${card.suit} ${card.number}`
         placeholder.appendChild(span)
-    });
+    })
     return placeholder
 }
 
@@ -53,8 +55,20 @@ const handlePlayerData = playerData => {
 
 }
 
-const handleOtherPlayer = (data) => {
-    console.log(data)
+const handleOtherPlayer = (playerData) => {
+    const placeholder = document.createElement("div");
+    const h5 = document.createElement("h5")
+    h5.innerHTML = `${playerData.name}'s cards`
+    placeholder.appendChild(h5)
+
+    playerData.cards.forEach(card => {
+        const span = document.createElement("span")
+        span.setAttribute("class", "card")
+        span.innerHTML = `${card.suit} ${card.number}`
+        placeholder.appendChild(span)
+    })
+    const content = document.querySelector("#content")
+    content.appendChild(placeholder)
 }
 // TODO: Currently this handler is kinda specific
 // to starting the game, but not for
@@ -69,7 +83,7 @@ const handleCreateTable = tableData => {
 
     // TODO: Somewhere here we need to check for 
     // other players on this table
-    tableData.players.forEach(handleOtherPlayer)
+
 
     clearContent()
     const divTable = getDivWithTable(tableData)
@@ -89,7 +103,14 @@ const handleCreateTable = tableData => {
         },
         "body": JSON.stringify(requestBody)
     }).then((response) => response.json()
-        .then(handlePlayerData)
+        .then((data) => {
+            handlePlayerData(data);
+            tableData.players.forEach((elem) => {
+                if (elem.name != data.name) {
+                    handleOtherPlayer(elem)
+                }
+            })
+        })
         .catch((error) => {
             console.error("Error:", error);
         }))
