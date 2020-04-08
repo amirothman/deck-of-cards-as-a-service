@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    display: "block";
+}
+h1 {
+    margin: 0.1em;
+    padding-bottom: 1.5em;
+}
+
+h2 {
+    padding-bottom: 0.5em;
+}
+.labelContainer {
+    margin: 1em;
+    padding-bottom: 1em;
+}
+
+.fieldContainer {
+    margin: 1em;
+}
+
+body {
+    text-align: center;
+    font-family: "Lucida Console", Courier, monospace;
+    color:#212121;
+}

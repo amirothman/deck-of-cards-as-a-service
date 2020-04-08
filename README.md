@@ -96,3 +96,11 @@ a form of identification.
 
 - Maybe the `signature` should be included as a URL params, instead of in the body/url to unify the pattern
 
+### Frontend
+
+- On every actions, we need to decide whether we should send this event to the event bus
+- Every person subscribe to three different kinds of channels
+    - The table channel
+    - Your own cards' channel
+    - Other players' cards' channel
+- Data will be sent to the channels via Server Sent-Events

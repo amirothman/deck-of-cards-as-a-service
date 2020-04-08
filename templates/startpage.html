@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Start Page</h2>
+<div id="content">
+    <div class="labelContainer">
+        <label for="" class="label">Name</label>:
+    </div>
+    <div class="fieldContainer">
+        <input type="text" class="field" placeholder="Name" id="nameField" size="40">
+    </div>
+    <div class="labelContainer">
+        <label for="" class="label">Key</label>:
+    </div>
+    <div class="fieldContainer">
+        <input id="tableKeyfield" type="text" class="field" placeholder="Enter key / Leave empty" size="100">
+    </div>
+    <div class="labelContainer">
+        <label for="" class="label">Join/Create</label>:
+    </div>
+    <div class="fieldContainer">
+        <input type="button" class="field" value="Join/Create" id="joinCreateTable">
+    </div>
+</div>
+{% endblock %}
