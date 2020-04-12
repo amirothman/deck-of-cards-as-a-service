@@ -5,6 +5,7 @@ from flask import Flask
 
 from api import api_blueprint
 from frontend import frontend
+from server_sent_events import server_sent_events
 
 
 def set_logger(app):
@@ -38,6 +39,7 @@ def register_blueprints(app):
     """Attach API routes to the application."""
     app.register_blueprint(api_blueprint)
     app.register_blueprint(frontend)
+    app.register_blueprint(server_sent_events)
 
 
 app = create_app()

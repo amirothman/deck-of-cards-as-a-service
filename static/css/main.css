@@ -20,6 +20,11 @@ h2 {
     margin: 1em;
 }
 
+.placeHolder {
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
 body {
     text-align: center;
     font-family: "Lucida Console", Courier, monospace;

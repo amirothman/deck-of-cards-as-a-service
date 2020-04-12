@@ -8,7 +8,7 @@ def browser():
     options.headless = True
     driver = Firefox(
         executable_path="/Users/amir/makmal/geckodriver/geckodriver",
-        # options=options,
+        options=options,
     )
     yield driver
     driver.close()
@@ -50,9 +50,19 @@ def test_can_join_table(browser):
     join_create_table_button = browser.find_element_by_id("joinCreateTable")
     join_create_table_button.click()
 
+    table_key = browser.find_element_by_id("tableKey")
+    table_name = table_key.text.strip()
+
     browser.get("http://localhost:8000")
 
     name_field = browser.find_element_by_id("nameField")
     name_field.send_keys("player2")
+    table_key_field = browser.find_element_by_id("tableKeyfield")
+    table_key_field.send_keys(table_name)
+
     join_create_table_button = browser.find_element_by_id("joinCreateTable")
     join_create_table_button.click()
+
+    card_labels = browser.find_elements_by_class_name("cardLabel")
+    card_labels = [label.text.strip() for label in card_labels]
+    assert "player's cards" in card_labels
